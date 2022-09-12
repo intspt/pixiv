@@ -1,49 +1,49 @@
 [{
-	"bookSourceComment": "",
-	"bookSourceGroup": "pixiv",
-	"bookSourceName": "pixiv",
-	"bookSourceType": 0,
-	"bookSourceUrl": "https://www.pixiv.net/novel/",
-	"bookUrlPattern": "",
-	"customOrder": 0,
-	"enabled": true,
-	"enabledCookieJar": false,
-	"enabledExplore": false,
-	"exploreUrl": "",
-	"header": "",
-	"lastUpdateTime": 1662984620227,
-	"loginUrl": "https://accounts.pixiv.net/login",
-	"respondTime": 180000,
-	"ruleBookInfo": {
-		"author": "userName",
-		"coverUrl": "profileImageUrl",
-		"init": "<js>\r\n(()=>{\r\n  body = JSON.parse(result).body;\r\n  body.tocUrl = \"https://www.pixiv.net/ajax/novel/series/\" + body.id + \"/content_titles?lang=zh\";\r\n  return JSON.stringify(body);\r\n})();\r\n</js>",
-		"intro": "caption",
-		"name": "title",
-		"tocUrl": "tocUrl",
-		"wordCount": "publishedTotalCharacterCount"
-	},
-	"ruleContent": {
-		"content": "<js>\n(()=>{\n\nvar json = result.match('{\\\"time.+}')[0];\njava.log(json);\njson = JSON.parse(json);\n\nvar novels = (()=>{\n    var result = \"\";\n    for(var key in json.novel){\n        result += JSON.stringify(json.novel[key]);\n    }\n    return JSON.parse(result);\n})();\n\nreturn novels.content;\n\n})();\n</js>",
-		"nextContentUrl": "<js>\n(()=>{\n\nvar json = result.match('{\\\"time.+}')[0];\njson = JSON.parse(json);\n\nvar novels = (()=>{\n    var result = \"\";\n    for(var key in json.novel){\n        result += JSON.stringify(json.novel[key]);\n    }\n    return JSON.parse(result);\n})();\n\nvar nextUrl = (()=>{\n\n    var hasNext = novels.seriesNavData != null && novels.seriesNavData.next != null\n\n    if (hasNext){\n        return \"https://www.pixiv.net/novel/show.php?id=\"+novels.seriesNavData.next.id;\n    }else {\n        return \"\"\n    }\n\n})();\n\nreturn nextUrl;\n\n})();\n</js>"
-	},
-	"ruleExplore": {},
-	"ruleSearch": {
-		"author": "userName",
-		"bookList": "<js>\r\n(function(result){\r\n  var result = JSON.parse(result);\r\n  var returnList = [];\r\n\r\n  let responseList = result.body.novel.data;\r\n  responseList.forEach((v, i) => {\r\n    result = v;\r\n    result.bookUrl = \"https://www.pixiv.net/ajax/novel/series/\" + result.id;\r\n    returnList.push(result);\r\n  });\r\n\r\n  return returnList;\r\n})(result);\r\n</js>",
-		"bookUrl": "bookUrl",
-		"coverUrl": "cover",
-		"intro": "caption",
-		"kind": "tags[*]",
-		"lastChapter": "",
-		"name": "title",
-		"wordCount": "publishedTextLength"
-	},
-	"ruleToc": {
-		"chapterList": "<js>\r\n(()=>{\r\n  chapterList = JSON.parse(result).body;\r\n  chapterList.forEach((v, i) => {\r\n    v.chapterUrl = \"https://www.pixiv.net/novel/show.php?id=\" + v.id;\r\n  });\r\n  return chapterList;\r\n})();\r\n</js>",
-		"chapterName": "title",
-		"chapterUrl": "chapterUrl"
-	},
-	"searchUrl": "https://www.pixiv.net/ajax/search/novels/{{java.encodeURI(key)}}?word={{java.encodeURI(key)}}&order=date_d&mode=all&p={{page}}&s_mode=s_tag&lang=zh&gs=1",
-	"weight": 0
+  "bookSourceComment": "",
+  "bookSourceGroup": "pixiv",
+  "bookSourceName": "pixiv",
+  "bookSourceType": 0,
+  "bookSourceUrl": "https://www.pixiv.net/novel/",
+  "bookUrlPattern": "",
+  "customOrder": 0,
+  "enabled": true,
+  "enabledCookieJar": false,
+  "enabledExplore": false,
+  "exploreUrl": "",
+  "header": "",
+  "lastUpdateTime": 1662984620227,
+  "loginUrl": "https://accounts.pixiv.net/login",
+  "respondTime": 180000,
+  "ruleBookInfo": {
+    "author": "userName",
+    "coverUrl": "profileImageUrl",
+    "init": "<js>\n(()=>{\n  body = JSON.parse(result).body;\n  body.tocUrl = \"https://www.pixiv.net/ajax/novel/series/\" + body.id + \"/content_titles?lang=zh\";\n  return JSON.stringify(body);\n})();\n</js>",
+    "intro": "caption",
+    "name": "title",
+    "tocUrl": "tocUrl",
+    "wordCount": "publishedTotalCharacterCount"
+  },
+  "ruleContent": {
+    "content": "<js>\n(()=>{\n\nvar json = result.match('{\\\"time.+}')[0];\njava.log(json);\njson = JSON.parse(json);\n\nvar novels = (()=>{\n    var result = \"\";\n    for(var key in json.novel){\n        result += JSON.stringify(json.novel[key]);\n    }\n    return JSON.parse(result);\n})();\n\nreturn novels.content;\n\n})();\n</js>",
+    "nextContentUrl": "<js>\n(()=>{\n\nvar json = result.match('{\\\"time.+}')[0];\njson = JSON.parse(json);\n\nvar novels = (()=>{\n    var result = \"\";\n    for(var key in json.novel){\n        result += JSON.stringify(json.novel[key]);\n    }\n    return JSON.parse(result);\n})();\n\nvar nextUrl = (()=>{\n\n    var hasNext = novels.seriesNavData != null && novels.seriesNavData.next != null\n\n    if (hasNext){\n        return \"https://www.pixiv.net/novel/show.php?id=\"+novels.seriesNavData.next.id;\n    }else {\n        return \"\"\n    }\n\n})();\n\nreturn nextUrl;\n\n})();\n</js>"
+  },
+  "ruleExplore": {},
+  "ruleSearch": {
+    "author": "userName",
+    "bookList": "<js>\n(function(result){\n  var result = JSON.parse(result);\n  var returnList = [];\n\n  let responseList = result.body.novel.data;\n  responseList.forEach((v, i) => {\n    result = v;\n    result.bookUrl = \"https://www.pixiv.net/ajax/novel/series/\" + result.id;\n    returnList.push(result);\n  });\n\n  return returnList;\n})(result);\n</js>",
+    "bookUrl": "bookUrl",
+    "coverUrl": "cover",
+    "intro": "caption",
+    "kind": "tags[*]",
+    "lastChapter": "",
+    "name": "title",
+    "wordCount": "publishedTextLength"
+  },
+  "ruleToc": {
+    "chapterList": "<js>\n(()=>{\n  chapterList = JSON.parse(result).body;\n  chapterList.forEach((v, i) => {\n    v.chapterUrl = \"https://www.pixiv.net/novel/show.php?id=\" + v.id;\n  });\n  return chapterList;\n})();\n</js>",
+    "chapterName": "title",
+    "chapterUrl": "chapterUrl"
+  },
+  "searchUrl": "https://www.pixiv.net/ajax/search/novels/{{java.encodeURI(key)}}?word={{java.encodeURI(key)}}&order=date_d&mode=all&p={{page}}&s_mode=s_tag&lang=zh&gs=1",
+  "weight": 0
 }]
